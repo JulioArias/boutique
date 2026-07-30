@@ -15,6 +15,7 @@ return [
         'driver' => 'file',
     ],
     'providers' => [
+        Illuminate\Filesystem\FilesystemServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
     ],
