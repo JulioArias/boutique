@@ -25,7 +25,12 @@ jobs:
         run: cp .env.example .env
 
       - name: Generar APP_KEY
-        run: php artisan key:generate --ansi --force
+        run: |
+          if php artisan list --raw | grep -q '^key:generate$'; then
+            php artisan key:generate --ansi --force
+          else
+            php -r '$key = "base64:".base64_encode(random_bytes(32)); $env = file_get_contents(".env"); $env = preg_replace("/^APP_KEY=.*$/m","APP_KEY=".$key,$env); file_put_contents(".env",$env); echo $key."\n";'
+          fi
 
       - name: Ejecutar pruebas
         run: php artisan test
