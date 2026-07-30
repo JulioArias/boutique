@@ -19,7 +19,7 @@ jobs:
           php-version: '8.2'
 
       - name: Instalar Composer
-        run: composer install --no-interaction --prefer-dist
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Copiar .env
         run: cp .env.example .env
